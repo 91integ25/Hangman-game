@@ -1,0 +1,22 @@
+body{
+	background-image: url(../images/space.jpg) ;
+	background-size:cover;
+
+}
+.border{
+	border:double 1px #fff;
+}
+h1{
+	font-size: 80px;
+	font-family:'Caveat Brush', cursive, Times Roman, courier;
+	font-weight:bold;
+}
+.text-center .words{
+	color: #fff;
+	font-size: 50px;
+	font-family:'Caveat Brush', cursive, Times Roman, courier;
+	font-weight:bold; 
+}
+.jumbotron .opacity {
+	opacity: 0.5;
+}
