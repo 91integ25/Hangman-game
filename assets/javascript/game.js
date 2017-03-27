@@ -1,8 +1,8 @@
 
 var wordsArray = [
-	"spaceship", 
-	"nebula", 
-	"galaxy",
+	"milkyway", 
+	"asteroid", 
+	"galaxies",
 	"wormhole",
 	"universe",
 ];
