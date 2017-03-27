@@ -1,38 +1,106 @@
+
 var wordsArray = [
-"SPACE", 
-"nebula", 
-"galaxy",
-],
+	"spaceship", 
+	"nebula", 
+	"galaxy",
+	"wormhole",
+	"universe",
+];
 
-	currentWord = "",
-	lettersInWord = [],
-	blanks = [],
-	lettersGuessed = [],
-	blankandsuccess = [],
+var currentWord ;
 
-	winCount = 0,
-	loseCount = 0,
-	numGuesses = 10;
-/* 1. select a word at random x
-2. want to break up that random word into letters and replace them with
-underscores x
-3. we want to add those underscores to the HTML 
-4. numguesses always equals 9, and blankandsuccess is an empty array, 
-and wronggueses is empty as well x */
+var blanks = "";
+var lettersGuessed  = [];
+var blankAndSuccess = [];
+var wrongLetters = " ";
 
-function start() {
- currentWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
- blanks = currentWord.split("");
- blanks = "_";
- document.getElementById("currentWord").innerHTML = blanks.join ("");
- numGuesses = 10;
- lettersGuessed = [];
- blankandsuccess = [];
+var winCount = 0;
+var	loseCount = 0;
+var	numGuesses = 10;
+ 
 
-console.log(blanks);
 
+
+pickRandomWord();
+function pickRandomWord() {
+	blanks = '';
+	currentWord  = wordsArray[Math.floor(Math.random() * wordsArray.length)];
+	for(var i = 0; i < currentWord.length; i++){
+		blanks = blanks + "_ ";
+		blankAndSuccess[i] = '_';
+		document.getElementById('Letter').innerHTML = blanks;
+
+	}
 }
 
-start();
+function displayFoundLetter() {
+	blanks = '';
+	console.log(blanks);
+	for(var i = 0; i < blankAndSuccess.length; i++){
+		blanks = blanks + " " + blankAndSuccess[i] ;
+		document.getElementById('Letter').innerHTML = blanks;
+	
+			}
+	
+}
+document.onkeyup = function () {
+	numGuesses--;
+		
+	console.log(numGuesses);
+	console.log(currentWord);
+	var lean = false;
+	for(var i = 0; i < currentWord.length;i++){
+		if(event.key.toLowerCase() === currentWord.charAt(i)){
+			blanks = '';
+			blankAndSuccess[i] = event.key;
+				lean = true;
+			
+			lettersGuessed.push(event.key);
+			 displayFoundLetter();
+
+		}
+
+	}
+
+	if(!lean) {
+		blanks = '';
+		document.getElementById('remaining').innerHTML = numGuesses;
+		wrongLetters = wrongLetters + event.key;
+		document.getElementById('wrongLettersGuessed').innerHTML = wrongLetters;
+		 displayFoundLetter();
+	}
+
+	if( blankAndSuccess.join('') === currentWord ){
+		blanks = '';
+		winCount++;
+		pickRandomWord();
+		numGuesses = 10;
+		document.getElementById('wrongLettersGuessed').innerHTML = '';
+		document.getElementById('wins').innerHTML = winCount;
+	    document.getElementById('Letter').innerHTML = '';
+		alert('you win');
+		displayFoundLetter();
+	}
+	else if (numGuesses <= 0){
+		blanks = '';
+		numGuesses = 10;
+		pickRandomWord();
+		loseCount++;
+		document.getElementById('loss').innerHTML = loseCount;
+		document.getElementById('wrongLettersGuessed').innerHTML = '';
+		document.getElementById('Letter').innerHTML = '';
+		alert('You Lose.');
+		document.getElementById('remaining').innerHTML = numGuesses;
+		 displayFoundLetter();
+	
+	}
+		
+
+
+	
+}
+
+
+
 
 
