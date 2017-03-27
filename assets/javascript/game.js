@@ -51,7 +51,6 @@ document.onkeyup = function () {
 	var lean = false;
 	for(var i = 0; i < currentWord.length;i++){
 		if(event.key.toLowerCase() === currentWord.charAt(i)){
-			blanks = '';
 			blankAndSuccess[i] = event.key;
 				lean = true;
 			
@@ -71,7 +70,7 @@ document.onkeyup = function () {
 	}
 
 	if( blankAndSuccess.join('') === currentWord ){
-		blanks = '';
+		wrongLetters = " ";
 		winCount++;
 		pickRandomWord();
 		numGuesses = 10;
@@ -82,7 +81,7 @@ document.onkeyup = function () {
 		displayFoundLetter();
 	}
 	else if (numGuesses <= 0){
-		blanks = '';
+		wrongLetters = " ";
 		numGuesses = 10;
 		pickRandomWord();
 		loseCount++;
